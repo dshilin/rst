@@ -4,6 +4,7 @@ class CreateOffers < ActiveRecord::Migration
       t.string :shop
       t.decimal :price, precision: 10, scale: 2
       t.string :url
+      t.integer :product_id
 
       t.timestamps null: false
     end
