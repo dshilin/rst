@@ -6,9 +6,10 @@ require 'open-uri'
 require 'rubygems'
 
 class MarketYandex
+
   SEARCH_URL = 'http://market.yandex.ru/search.xml?cvredirect=1&text='
 
-  attr_reader :name, :model_id, :image, :images, :thumb, :pricechart_thumb, :characteristics, :price, :currency
+  attr_reader :shop, :price, :url
 
   #### ПОИСК ТОВАРОВ
 
@@ -26,7 +27,7 @@ class MarketYandex
       "Referer" => "http://www.ruby-lang.org/",
       :allow_redirections => :safe)
       #:proxy => "http://#{proxy_list}") # избегаем бана от Яндекса
-    data = Nokogiri::HTML(data)
+      data = Nokogiri::HTML(data)
     if !data.to_s.include? 'product-offers-list' # иногда может возвращаться бесполезная информация
       puts data
       puts "<=== получил не нужную информацию! пробую еще! ===>"
@@ -67,20 +68,18 @@ class MarketYandex
   # парсилка предложений со страницы товара
   def self.parse_offers_list(doc)
     i = 0
+    offers = []
     doc.css('.product-offer').each do
       price = doc.css('.product-offer__item_type_price')[i].text.gsub(/[руб.]/, '').gsub(/\u2009/, '').to_i
       shop  = doc.css('.product-offer__item_type_shop')[i].text
       url   = doc.css('.product-offer__item_type_shop a')[i]['href']
-      puts "#{price} #{shop} https:#{url}"
+      offers << "#{price}_#{shop}_https:#{url}"
+      puts offers[i]
       i += 1
     end
+    return offers
   end
 
 end
 
-class Offer
-  attr_accessor :name, :link, :price
-
-end
-
-pr=MarketYandex.search('DELL U2412M')
+#pr=MarketYandex.search('DELL U2412M')

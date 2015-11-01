@@ -4,7 +4,8 @@ ruby '2.2.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
-# Use SCSS for stylesheets
+gem 'pg'
+# Use SASS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'slim'
 # Use Uglifier as compressor for JavaScript assets
@@ -25,16 +26,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
-
+# gem 'unicorn' 
+gem 'thin'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'open_uri_redirections'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails'
-  gem 'sqlite3'
   gem 'factory_girl_rails'
 end
 
@@ -51,7 +52,5 @@ group :test do
 end
 
 group :production do
-  gem 'thin'
-  gem 'pg'
   gem 'rails_12factor'
 end
