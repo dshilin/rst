@@ -18,7 +18,7 @@ class MarketYandex
   end
 
   def self.get_content(url)
-    #use_proxy
+    use_proxy
     begin
       data = open(url, "User-Agent" => "Ruby/#{RUBY_VERSION}",
       "From" => "foo@bar.invalid",
