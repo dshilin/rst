@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require 'bundler/setup'
 require 'cgi'
 require 'nokogiri'
 require 'open_uri_redirections'
