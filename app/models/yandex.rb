@@ -18,12 +18,13 @@ class MarketYandex
   end
 
   def self.get_content(url)
-    use_proxy
+    #use_proxy
     begin
       data = open(url, "User-Agent" => "Ruby/#{RUBY_VERSION}",
       "From" => "foo@bar.invalid",
       "Referer" => "http://www.ruby-lang.org/",
-      :allow_redirections => :safe)
+      :allow_redirections => :safe,
+      :proxy => "http://#{proxy_list}")
       data = Nokogiri::HTML(data)
     if !data.to_s.include? 'product-offers-list' # иногда может возвращаться бесполезная информация
       puts data
