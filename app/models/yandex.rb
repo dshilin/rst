@@ -9,8 +9,6 @@ class MarketYandex
 
   SEARCH_URL = 'http://market.yandex.ru/search.xml?cvredirect=1&text='
 
-  attr_reader :shop, :price, :url
-
   #### ПОИСК ТОВАРОВ
 
   # Поиск товара по ключевому слову
@@ -26,7 +24,6 @@ class MarketYandex
       "From" => "foo@bar.invalid",
       "Referer" => "http://www.ruby-lang.org/",
       :allow_redirections => :safe)
-      #:proxy => "http://#{proxy_list}") # избегаем бана от Яндекса
       data = Nokogiri::HTML(data)
     if !data.to_s.include? 'product-offers-list' # иногда может возвращаться бесполезная информация
       puts data
@@ -73,8 +70,7 @@ class MarketYandex
       price = doc.css('.product-offer__item_type_price')[i].text.gsub(/[руб.]/, '').gsub(/\u2009/, '').to_i
       shop  = doc.css('.product-offer__item_type_shop')[i].text
       url   = doc.css('.product-offer__item_type_shop a')[i]['href']
-      offers << "#{price}_#{shop}_https:#{url}"
-      puts offers[i]
+      offers << "#{price}.....#{shop}.....https:#{url}"
       i += 1
     end
     return offers
