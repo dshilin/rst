@@ -23,8 +23,7 @@ class MarketYandex
       data = open(url, "User-Agent" => "Ruby/#{RUBY_VERSION}",
       "From" => "foo@bar.invalid",
       "Referer" => "http://www.ruby-lang.org/",
-      :allow_redirections => :safe,
-      :proxy => "http://#{proxy_list}")
+      :allow_redirections => :safe)
       data = Nokogiri::HTML(data)
     if !data.to_s.include? 'product-offers-list' # иногда может возвращаться бесполезная информация
       puts data
@@ -45,7 +44,7 @@ class MarketYandex
   end
 
   def self.use_proxy
-    ENV['http_proxy'] = "http://#{proxy_list}"
+    export http_proxy="http://#{proxy_list}"
     puts "using proxy = #{ENV['http_proxy']}"
   end
 
