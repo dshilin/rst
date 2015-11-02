@@ -11,7 +11,8 @@ class Product < ActiveRecord::Base
   def get_yandex_offers
     
     pr = MarketYandex.search name
-      
+    
+    # удаляем существующие предложения
     if has_offers?
       offers = Offer.where(:product_id => id)
       offers.each { |o| o.destroy }
