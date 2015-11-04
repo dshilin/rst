@@ -10,5 +10,12 @@
   <%= @product.price %>
 </p>
 
+
+    <% @product.offers.each do |offer| %>
+        <div><%= offer.shop %></div>
+        <div><%= offer.price %></div>
+        <div><%= offer.url %></div>
+    <% end %>
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
